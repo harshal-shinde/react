@@ -69,5 +69,45 @@ const calMinMax =  (squares, playerToHelp, human, computer) => {
     if(result) {
       return result;
     }
+
+    const scores = [];
+    //loop through available availSpots
+    //fill moves and scores with
+
+    const moves = availSpots.map((val, idx)=> {
+      const nextPlayer = (player == human) ?
+        computer : human;
+
+        //Move to test with current player
+        sqaures[val] = player;
+        //recursive with depth +1
+
+        const score = minimax(squares, nextPlayer, depth + 1);
+        score.push(score);
+
+        //reverse move
+        sqaures[val] = null;
+        return val;
+    });
+
+    let scoreIndex = 0;
+    if(player == playerToHelp) {
+      //player to help to maximize its points : max calc
+      scoreIndex = scores.reduce((max, val) =>
+      (iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0);
+    }else {
+      //Opponents wants to minimize player to help  points: min calc
+      scoreIndex = scores.reduce(
+        (iMin, x, i, arr)=> {
+            x< arr[min] ? i : iMin, o
+      })
+    }
+
+    if(depth == 0) {
+      return moves[scoreIndex];
+    }
+    return scores[scoreIndex];
   }
+  const res = minimax(squares, playerToHelp, 0);
+  return res;
 }
